@@ -1,16 +1,20 @@
 <div class="col-lg-3">
 			<h1>User info</h1>
-				<div class="user-image">Image</div>
+			<%= attachment_image_tag @user, :profile_image, :fill, 60, 60, class: "img-circle pull-left profile-thumb", fallback: "no_image.jpg"%>
 				<table class="table table-tag">
 					<tr>
 						<td>Name</td>
 						<td><%= user.name %></td>
+
 					</tr>
 					<tr>
 						<td>Introduction</td>
 						<td><%= user.introduction %></td>
 					</tr>
 				</table>
+				<% if user.id == current_user.id %>
+				<%= link_to "profile edit", edit_user_path(user), class:"btn btn-info btn-block" %>
+				<% end %>
 			<h1>New book</h1>
 			<%= form_for(book) do |f| %>
 
@@ -18,6 +22,6 @@
 				<%= f.text_field :title %>
 				<h4>Opinion</h4>
 				<%= f.text_area :body %>
-				<%= f.submit "Create Book" %>
+				<%= f.submit "Create Book", class:"btn btn-info btn-block" %>
 			<% end %>
 		</div>
