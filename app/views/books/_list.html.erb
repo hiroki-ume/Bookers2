@@ -1,0 +1,23 @@
+<div class="col-lg-3">
+			<h1>User info</h1>
+				<div class="user-image">Image</div>
+				<table class="table table-tag">
+					<tr>
+						<td>Name</td>
+						<td><%= user.name %></td>
+					</tr>
+					<tr>
+						<td>Introduction</td>
+						<td><%= user.introduction %></td>
+					</tr>
+				</table>
+			<h1>New book</h1>
+			<%= form_for(book) do |f| %>
+
+				<h4>Title</h4>
+				<%= f.text_field :title %>
+				<h4>Opinion</h4>
+				<%= f.text_area :body %>
+				<%= f.submit "Create Book" %>
+			<% end %>
+		</div>

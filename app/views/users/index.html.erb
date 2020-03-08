@@ -1,0 +1,36 @@
+<div class="container">
+	<div class="row">
+		<div class="col-lg-4">
+			<h1>User info</h1>
+				<div class="user-image"></div>
+				<table class="table table-tag">
+					<tr>
+						<td>Name</td>
+						<td><%= @user.name %></td>
+					</tr>
+					<tr>
+						<td>Introduction</td>
+						<td><%= @user.introduction %></td>
+					</tr>
+				</table>
+		<div class="col-lg-8">
+			<h1>Books</h1>
+			<table>
+				<tr>
+					<th></th>
+					<th>Title</th>
+					<th>Opinion</th>
+				</tr>
+				<% @books.each do |book| %>
+				<tr>
+					<td></td>
+					<td><%= book.title %></td>
+					<td><%= book.body %></td>
+				</tr>
+				<% end %>
+			</table>
+		</div>
+		</div>
+	</div>
+</div>
+
