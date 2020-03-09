@@ -1,7 +1,9 @@
 <div class="container">
 	<div class="row">
+		<%= flash[:success] %>
+		<%= flash[:notice] %>
 		<%= render 'users/list', book: @book, user: @user %>
-		<div class="col-lg-8">
+		<div class="col-xs-9">
 			<h1>Books</h1>
 			<table class="table table-default">
 				<tr>
