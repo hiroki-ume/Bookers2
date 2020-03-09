@@ -20,11 +20,8 @@
 						<%= @book.body %>
 					</td>
 					<% if current_user.id == @book.user.id %>
-					<td><%= link_to "Edit", edit_book_path(@book.id) %></td>
-					<td><%= link_to "Destroy", book_path(@book), method: :delete, data: {confirm: "本当に消しますか？"} %></td>
-					<% else %>
-					<td><%= link_to "Edit", books_path %></td>
-					<td><%= link_to "Destroy", books_path %></td>
+					<td><%= link_to "Edit", edit_book_path(@book.id), class: "btn btn-success" %></td>
+					<td><%= link_to "Destroy", book_path(@book), method: :delete, data: {confirm: "本当に消しますか？"}, class: "btn btn-danger" %></td>
 					<% end %>
 				</tr>
 			</table>

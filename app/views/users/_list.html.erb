@@ -12,15 +12,17 @@
 					</tr>
 				</table>
 				<% if user.id == current_user.id %>
-				<%= link_to "profile edit", edit_user_path(user), class:"btn btn-info btn-block" %>
+				<%= link_to edit_user_path(user), class:'btn btn-default btn-block' do %>
+				<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+				<% end %>
 				<% end %>
 			<h1>New book</h1>
 			<%= form_for(book) do |f| %>
 
 				<h4>Title</h4>
-				<%= f.text_field :title %>
+				<%= f.text_field :title, size: 35 %>
 				<h4>Opinion</h4>
-				<%= f.text_area :body %><br>
-				<%= f.submit "Create Book", class:"btn btn-info btn-block" %>
+				<%= f.text_area :body, size:"34x3" %><br>
+				<%= f.submit "Create Book", class:"btn btn-primary btn-block" %>
 			<% end %>
 		</div>
