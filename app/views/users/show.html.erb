@@ -2,8 +2,10 @@
 	<div class="row">
 		<%= flash[:success] %>
 		<%= flash[:notice] %>
-		<%= render 'users/list', book: @book, user: @current_user %>
+		<%= render 'users/list', book: @book, user: @users %>
+
 		<div class="col-xs-9">
+
 			<h1>Books</h1>
 			<table class="table table-default table-hover">
 				<tr>
@@ -14,6 +16,8 @@
 				</tr>
 				<% @books.each do |book| %>
 					<%= render "books/books", book: book %>
+
+
 				<% end %>
 			</table>
 		</div>

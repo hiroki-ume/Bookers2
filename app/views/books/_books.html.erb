@@ -4,4 +4,9 @@
   <td><%= book.body %></td>
   <td><%= render 'books/favorite', book: book %></td>
   <td><%= book.comments.count %>件のコメント</td>
+
+  <% if current_user.id == book.user.id %>
+    <td><%= link_to "Edit", edit_book_path(book.id), class: "btn btn-success" %></td>
+    <td><%= link_to "Destroy", book_path(book), method: :delete, data: {confirm: "本当に消しますか？"}, class: "btn btn-danger" %></td>
+  <% end %>
 </tr>
