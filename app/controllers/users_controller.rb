@@ -28,16 +28,23 @@ class UsersController < ApplicationController
   	end
   	redirect_to user_path(user.id)
   end
+
+  # フォロー機能
   def following
     @users  = User.find(params[:id])
     @user = @users.following_user
-
-
   end
-
   def followed
     @users  = User.find(params[:id])
     @user = @users.followed_user
+  end
+
+  # 検索機能
+  def  search
+    @user = User.find(current_user.id)
+    @book = Book.new
+    @users = User.search(params[:q])
+    render :index
   end
 
   private

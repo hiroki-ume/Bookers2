@@ -7,7 +7,6 @@ class BooksController < ApplicationController
 		@books = Book.all
 	end
 	def show
-		@current_user = User.find(current_user.id)
 		@new_book = Book.new
 		@book = Book.find(params[:id])
 		@comment = Comment.new
@@ -43,6 +42,13 @@ class BooksController < ApplicationController
 		book = Book.find(params[:id])
 		book.destroy
 		redirect_to books_path
+	end
+	# 検索機能
+	def search
+		@user = User.find(current_user.id)
+		@book = Book.new
+		@books = Book.search(params[:q])
+		render "index"
 	end
 	private
 	def book_params

@@ -26,4 +26,14 @@ class User < ApplicationRecord
     following_user.include?(user)
   end
 
+  class << self
+    def search(query)
+      rel = order("id")
+      if query.present?
+        rel = rel.where("name LIKE?", "%#{query}%")
+      end
+      rel
+    end
+  end
+
 end

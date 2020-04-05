@@ -3,11 +3,11 @@
 		<%= flash[:success] %>
 		<%= flash[:notice] %>
 
-		<%= render 'books/list', book: @new_book, user: @current_user %>
+		<%= render 'books/list', book: @new_book, user: @book.user %>
 		<div class="col-xs-9">
 			<h1>Book detail</h1>
 			<table class="table table-default">
-				<tr>
+				<tr class="info">
 					<%= render "books", book: @book %>
 				</tr>
 			</table>

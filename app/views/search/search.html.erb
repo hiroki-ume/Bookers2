@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-9">
+          <h1><%= @model %></h1>
+          <table class="table table-default, table-hover">
+          <% if @model == 'user' %>
+              <tr class="info">
+                <th>USER IMAGE</th>
+                <th>NAME</th>
+              </tr>
+            <% @datas.each do |data| %>
+              <tr>
+                <td><%= attachment_image_tag data, :profile_image, :fill, 50, 50, class:"img-circle" ,fallback: "no_image.jpg", size: "50x50" %></td>
+                <td><%= link_to data.name, user_path(data) %></td>
+              </tr>
+            <% end %>
+          <% elsif @model == 'book' %>
+              <tr class="info">
+                <th>TITLE</th>
+                <th>OPINION</th>
+              </tr>
+            <% @datas.each do |data| %>
+              <tr>
+                <th><%= link_to data.title, book_path(data) %></th>
+                <td><%= data.body %></td>
+              </tr>
+            <% end %>
+          <% end %>
+          </table>
+      </div>
+  </div>
+</div>
