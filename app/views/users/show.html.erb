@@ -2,7 +2,7 @@
 	<div class="row">
 		<%= flash[:success] %>
 		<%= flash[:notice] %>
-		<%= render 'users/list', book: @book, user: @users %>
+		<%= render 'users/list', book: @books, user: @users %>
 
 		<div class="col-xs-9">
 
@@ -17,8 +17,11 @@
 					<th></th>
 					<th></th>
 				</tr>
-				<% @books.each do |book| %>
+				<% @book.each do |book| %>
+				<tr class="book_<%= book.id %>">
 					<%= render "books/books", book: book %>
+				</tr>
+
 
 
 				<% end %>

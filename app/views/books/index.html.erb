@@ -22,7 +22,10 @@
 							<th></th>
 						</tr>
 						<% @books.each do |book| %>
-						<%= render "books", book: book %>
+						<tr class="book_<%= book.id %>">
+							<%= render "books", book: book %>
+						</tr>
+
 						<% end %>
 						</table>
 				</div>

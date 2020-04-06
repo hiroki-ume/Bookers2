@@ -9,9 +9,9 @@ class UsersController < ApplicationController
   end
   def show
   	@user = User.find(current_user.id)
-  	@book = Book.new
+  	@books = Book.new
   	@users = User.find(params[:id])
-   	@books = @users.books
+   	@book = @users.books
   end
   def edit
   	@user = User.find(params[:id])
@@ -40,12 +40,6 @@ class UsersController < ApplicationController
   end
 
   # 検索機能
-  def  search
-    @user = User.find(current_user.id)
-    @book = Book.new
-    @users = User.search(params[:q])
-    render :index
-  end
 
   private
   def user_params

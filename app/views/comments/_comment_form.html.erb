@@ -1,0 +1,6 @@
+<div class="form-group">
+  <%= form_with(model: [@book, comment],remote: true ) do |f| %>
+  <%= f.text_area :content, rows: '5', placeholder: "コメントを投稿"  %><br>
+  <%= f.submit "post comment" %>
+  <% end %>
+</div>

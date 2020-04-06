@@ -7,26 +7,18 @@
 		<div class="col-xs-9">
 			<h1>Book detail</h1>
 			<table class="table table-default">
-				<tr class="info">
+				<tr class="book_<%= @book.id %>">
 					<%= render "books", book: @book %>
 				</tr>
 			</table>
 			<h2>Comments</h2>
-			<table class="table table-striped">
-				<% @book.comments.each do |comment| %>
-				<tr>
-					<th><%= link_to comment.user.name, user_path(comment.user) %></th>
-					<td><%= comment.content %></td>
-					<% if comment.user.id == current_user.id %>
-					<td><%= link_to "delete", book_comments_path(comment.book_id), method: :delete %></td>
-					<% end %>
-				</tr>
-				<% end %>
+			<table class="table table-striped", id="comment_area">
+			    	<%= render "comments/comment" %>
 			</table>
 				<br>
 				<%= flash[:alert] %>
 				<h2>Post comment</h2>
-			<%= render "comments/comment", comment: @comment %>
+			<%= render "comments/comment_form", comment: @comment %>
 		</div>
 	</div>
 </div>

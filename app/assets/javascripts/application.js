@@ -16,6 +16,8 @@
 //= require jquery
 //= require bootstrap-sprockets
 //= require_tree .
+
+
 // var title = "JavaScriptが使えました。";
 // alert(title);
 //
