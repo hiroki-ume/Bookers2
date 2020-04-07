@@ -1,10 +1,15 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+
+  # before_validation :address
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
          validates :name, presence: true, length: {maximum: 20, minimum: 2}
          validates :introduction, length: {maximum: 50}
+    #        validates :latitude, presence: true
+    # validates :longitude, presence: true
   has_many :books
   has_many :favorites, dependent: :destroy
   has_many :comments, dependent: :destroy
@@ -15,6 +20,18 @@ class User < ApplicationRecord
   has_many :followed, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
   has_many :following_user, through: :follower, source: :followed
   has_many :followed_user, through: :followed, source: :follower
+
+
+  include JpPrefecture
+  jp_prefecture :prefecture_code
+
+  def prefecture_name
+    JpPrefecture::Prefecture.find(code: prefecture_code).try(:name)
+  end
+
+  def prefecture_name=(prefecture_name)
+    self.prefecture_code = JpPrefecture::Prefecture.find(name: prefecture_name).code
+  end
 
   def follow(user_id)
     follower.create(followed_id: user_id)
@@ -35,5 +52,30 @@ class User < ApplicationRecord
       rel
     end
   end
+
+  
+
+  geocoded_by :address
+  after_validation :geocode
+  # after_validation :debug
+
+  def address
+      self.address = self.prefecture_name + self.address_city + self.address_street
+  end
+
+
+
+
+
+
+
+  # private
+  # def geocode
+  #   uri = URI.escape("https://maps.googleapis.com/maps/api/geocode/json?address="+self.address_street.gsub(" ", "")+"&key=[AIzaSyAjuFD4xSfQJC4YMoFEl_pi7iJjdCdtOYk]")
+  #   res = HTTP.get(uri).to_s
+  #   response = JSON.parse(res)
+  #   self.latitude = response["results"][0]["geometry"]["location"]["lat"]
+  #   self.longitude = response["results"][0]["geometry"]["location"]["lng"]
+  # end
 
 end
