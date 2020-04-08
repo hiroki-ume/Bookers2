@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-6 col-offset-xs-3">
+      <p>ルーム名<%= @room.name %></p>
+
+      <input type="text" data-behavior="room_speaker" data-user="current_user.id"
+        data-room="<%= @room.id %>">
+
+      <div id="chats">
+        <%= render "chat", collection: @chats %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -2,7 +2,21 @@
 	<div class="row">
 		<%= flash[:success] %>
 		<%= flash[:notice] %>
+		<% if user_signed_in? %>
+			<h2>トークルーム作成</h2>
+			<%= form_with model: @room do |f| %>
+				<%= f.label :name %>
+				<%= f.text_field :name %>
+				<%= f.submit %>
+			<% end %>
+			<h1>トークルーム選択</h1>
+			<% @rooms.each do |room| %>
+				<%= link_to room.name, room_path(room) %><br>
+			<% end %>
+			<%# <!-- <h1><%= link_to 'チャットを始める' rooms_path,method: :post  %></h1> --> %>
+		<% end %>
 		<%= render 'users/list', book: @books, user: @users %>
+
 
 		<div class="col-xs-9">
 

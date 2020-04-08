@@ -10,10 +10,19 @@ class User < ApplicationRecord
          validates :introduction, length: {maximum: 50}
     #        validates :latitude, presence: true
     # validates :longitude, presence: true
-  has_many :books
+  has_many :books, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :user_rooms
+  has_many :rooms, through: :user_rooms
+  has_many :chats
   attachment :profile_image
+
+  after_create :thanks_mailer
+
+  def thanks_mailer
+    ThanksMailer.thanks_mail(self).deliver_now
+  end
 
 
   has_many :follower, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy # フォロー取得
@@ -22,16 +31,16 @@ class User < ApplicationRecord
   has_many :followed_user, through: :followed, source: :follower
 
 
-  include JpPrefecture
-  jp_prefecture :prefecture_code
-
-  def prefecture_name
-    JpPrefecture::Prefecture.find(code: prefecture_code).try(:name)
-  end
-
-  def prefecture_name=(prefecture_name)
-    self.prefecture_code = JpPrefecture::Prefecture.find(name: prefecture_name).code
-  end
+  # include JpPrefecture
+  # jp_prefecture :prefecture_code
+  #
+  # def prefecture_name
+  #   JpPrefecture::Prefecture.find(code: prefecture_code).try(:name)
+  # end
+  #
+  # def prefecture_name=(prefecture_name)
+  #   self.prefecture_code = JpPrefecture::Prefecture.find(name: prefecture_name).code
+  # end
 
   def follow(user_id)
     follower.create(followed_id: user_id)
@@ -43,25 +52,26 @@ class User < ApplicationRecord
     following_user.include?(user)
   end
 
-  class << self
-    def search(query)
-      rel = order("id")
-      if query.present?
-        rel = rel.where("name LIKE?", "%#{query}%")
-      end
-      rel
-    end
-  end
+  # class << self
+  #   def search(query)
+  #     rel = order("id")
+  #     if query.present?
+  #       rel = rel.where("name LIKE?", "%#{query}%")
+  #     end
+  #     rel
+  #   end
+  # end
 
 
 
-  geocoded_by :address
-  after_validation :geocode
+  # geocoded_by :address
+  # after_validation :geocode
+
   # after_validation :debug
 
-  def address
-      self.address = self.prefecture_name + self.address_city + self.address_street
-  end
+  # def address
+  #     self.address = self.prefecture_name + self.address_city + self.address_street
+  # end
 
 
 

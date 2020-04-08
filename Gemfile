@@ -71,3 +71,4 @@ gem "jp_prefecture"
 gem 'geocoder'
 gem 'gmaps4rails'
 gem 'dotenv-rails'
+gem 'letter_opener'

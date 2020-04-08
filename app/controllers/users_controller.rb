@@ -10,6 +10,8 @@ class UsersController < ApplicationController
   def show
   	@user = User.find(current_user.id)
   	@books = Book.new
+    @room = Room.new
+    @rooms = current_user.rooms
   	@users = User.find(params[:id])
    	@book = @users.books
   end
@@ -29,6 +31,7 @@ class UsersController < ApplicationController
   	redirect_to user_path(user.id)
   end
 
+
   # フォロー機能
   def following
     @users  = User.find(params[:id])
@@ -45,5 +48,8 @@ class UsersController < ApplicationController
   def user_params
   	params.require(:user).permit(:name, :introduction, :profile_image, :postcode,
     :prefecture_name, :address_city, :address_street, :address_building, :latitude, :longitude)
+  end
+  def room_params
+    params.require(:room).permit(:name)
   end
 end
