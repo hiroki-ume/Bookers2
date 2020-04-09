@@ -72,3 +72,4 @@ gem 'geocoder'
 gem 'gmaps4rails'
 gem 'dotenv-rails'
 gem 'letter_opener'
+gem 'whenever', require: false

@@ -13,7 +13,6 @@
 			<% @rooms.each do |room| %>
 				<%= link_to room.name, room_path(room) %><br>
 			<% end %>
-			<%# <!-- <h1><%= link_to 'チャットを始める' rooms_path,method: :post  %></h1> --> %>
 		<% end %>
 		<%= render 'users/list', book: @books, user: @users %>
 

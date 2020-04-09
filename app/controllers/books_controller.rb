@@ -17,8 +17,9 @@ class BooksController < ApplicationController
 		@books = Book.all
 		@book.user_id = current_user.id
 		@user = User.find(current_user.id)
+
 		if @book.save
-			ThanksMailer.thanks_mail(current_user).deliver_now
+			DailyMailer.daily_mailer.deliver_now
 			flash[:success] = "You have creatad book successfully."
 			redirect_to book_path(@book)
 		else

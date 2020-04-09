@@ -4,8 +4,8 @@
       address: 'smtp.gmail.com',
       domain: 'gmail.com',
       port: 587,
-      user_name: 'ENV["ADDRESS"]',
-      password: 'ENV["PASSWORD"]',
+      user_name: ENV["ADDRESS"],
+      password: ENV["PASSWORD"],
       authentication: 'plain',
       enable_starttls_auto: true
     }
